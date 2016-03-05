@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="nl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="Author" content="Dennis van Zanten, ZZAO15A, 1013421">
+        <meta name="Keywords" content="Basisschool het Boterbloempje, tafels, rekenen, oefenen, school, keersommen, sommen">
+        <meta name="Description" content="Leer tafels rekenen met de hulpwebsite van basisschool het Boterbloempje.">
+        <title>Welkom bij het Boterbloempje</title>
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="css/styles.comp.css">
+    </head>
+    <body>
+        <div id="header">
+            <img src="images/toetsdag_02.png" id="img2">
+        </div>
+        <div id="nav">
+            <a href="index.com.html"><img src="images/home.png" width="300px;" /></a>
+            <a href="Tafeloefen.com.html"><img src="images/tafelsoef_02.png" width="300px" /></a>
+            <a href="Tafeltoets.com.html"><img src="images/taftoetsx_02.png" width="300px" /></a>
+            <a href="Tafelquiz.com.html"><img src="images/quiz_02.png" width="300px" /></a>
+            <a href="extrasommen.com.html"><img src="images/extras_02.png" width="300px" /></a>
+            <img src="images/pole.png" id="pole"/>
+        </div>
+        <div id="section">
+            <h2>De toets</h2>
+            <p>Welke toets wil je maken?</p>
+            <label for="toetsmenu"></label>
+            <select id="toetsmenu" onchange="toets()">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            </select>
+                <div id="toetsding"></div>
+            <script>
+                // script voor toetsering tafels.
+                function toets() {
+                    var x = document.getElementById("toetsmenu").value;
+
+                    document.getElementById("toetsding").innerHTML = "";
+                    for (i = 1; i < 11; i++) {
+                        document.getElementById("toetsding").innerHTML += x + " x " + i +
+                                " = <input type='text' id='test" + i + "'>" + "<br>";
+                    }
+                    document.getElementById("toetsding").innerHTML += "<input type='submit' value='check' id='sub' onclick='calc()'>"
+                }
+                // als antwoord gelijk is aan vraag geef class aan id.
+                function calc() {
+                    var x = document.getElementById("toetsmenu").value;
+
+                    for (i = 1; i < 11; i++) {
+                        var input = document.getElementById("test" + i);
+                        var result = input.value;
+                        console.log(input.value);
+                        if (result == x * i) {
+                            input.className = "correct"
+                        } else {
+                            input.className = "wrong"
+                        }
+                    }
+                    //check of leerling geslaagd is.
+                    var corcheck = document.querySelectorAll('#section .correct').length;
+                    var wrongcheck = document.querySelectorAll('#section .wrong').length;
+                    if (corcheck > 6){
+                        alert("Goedzo! Je hebt er " + corcheck + " goed! GESLAAGD!");
+                    }
+                    else {
+                        alert("Helaas! Je hebt er " + wrongcheck + " fout, terug naar school :(");
+                        document.getElementById("extra").innerHTML = "Klik <a href='extrasommen.com.html'>hier</a> om meer oefeningen te krijgen";
+                    }
+                }
+            </script>
+            <div id="extra"></div>
+            <img src="images/chick_03.png" width="100px" id="chick" />
+        </div>
+        <div id="footer">
+            <p id="contact"><a href="contact.html">Contact</a></p>
+        </div>
+    </body>
+</html>
